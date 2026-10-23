@@ -1,0 +1,696 @@
+/* Sektion 1: CSS Variabler (ROOT) - Central*/
+:root {
+    /* Exakta färger från style guide */
+    --color-dark-blue: #011827; /* Bakgrund för header, story & footer*/
+    --color-mid-blue: #36769D; /* Mellanblå accent */
+    --color-light-blue: #8ACFE5; /* Sekundär knapp (On-site challenges) */
+    --color-red: #E3170A; /* Primär knapp (Online/Book room) & Stars */
+    --color-grey: #B6BDB5; /* Grå nyans för sekundärtext/detaljer */ 
+
+    /* Funktionella färger för layout för en organiserad kod*/
+    --bg-dark: var(--color-dark-blue);
+    --bg-card: #ffffff; /* Vit bakgrund för escape room-korten*/
+    --text-light:#ffffff; /* Vit text för mörka sektioner*/
+    --text-dark: #000000; /* Svart text för ljusa sektioner*/
+    --text-muted: #111111; 
+    /* Layout */
+    --container-width: 1200px;
+}
+
+/* Sektion 2: CSS reset och basstilar - Nollställer webbläsarens standardregler */
+* {
+    margin: 0; /* Tar bort alla inbyggda ytter-marginaler */
+    padding: 0; /* Tar bort alla inbyggda inner-marginaler */
+    box-sizing: border-box; /* Gör att padding inte ökar bredden på element */
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Typsnitt till Roboto som reserv */
+    background-color: var(--bg-card); 
+    color: var(--text-dark);
+    line-height: 1.5; /* Radavstånd */
+    overflow-x: hidden; /* Förhindrar horisontellt skrollande på mobil */
+}
+
+a {
+    text-decoration: none; /* Ta bort understrukna strecket på länkar */
+    color: inherit; /* Länkar ärver textfärgen från sin omgivning */
+}
+
+ul {
+    list-style: none; /* Tar bort punkter från alla listor */
+}
+
+img {
+    max-width: 100%; /* Säkerställer att bilder inte blir bredare än skärmen */
+    display: block; /* Bilden får tomrum i botten */
+}
+
+/* MOBILE-FIRST - 480px */
+
+/* Sektion 3: Headers (Mobil-först) */
+.main-header {
+    background-color: var(--color-dark-blue);
+    padding: 16px;
+    color: var(--text-light);
+}
+
+.header-container {
+    display: flex; /* Flexbox som aktiveras för att lägga logga & meny vid varandra */
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto; /* Centrerar hela behållaren på skärmen */
+}
+
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+}
+
+.site-title {
+    line-height: 100%;
+    font-weight: 700; /* Gör företagstiteln fetstilt */
+    font-size: 20px;
+    max-width: 70px;
+}
+
+/* Döljer naviagtionslänkarna på mobil enligt designspecifikationen */
+.main-nav {
+    display: none; 
+
+}
+
+/* Sektion 4: Hero's */
+.hero-section {
+    width: 100%;
+    background-color: var(--bg-card);
+    margin-bottom: 160px;
+}
+
+.hero-image-container {
+    background-image: url('Images/Hacker-computer.png');
+    background-size: cover;
+    background-position: center;
+    height: 40vh; /* Bildens fasta höjd på mobil */
+    width: 100%;
+    position: relative; /* Bildbehållare till bas så knapparna kan postioneras */
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column; /* Staplar knapparna vertiaklt */
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 24px 20px;
+    background-color: var(--bg-card); /* Ger knapparna vit bakgrund */
+    /* Tvingar ner knapparna till vita fältet precis under bilden */
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+/* Gemensamma knappstilar utifrån syle-guide */
+.btn {
+    display: inline-block; /* Lyssnar på padding och marginaler noga */
+    text-align: center; /* Text centrerad i knappen */
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+/* Ljusblå blockknapp (On-site) */
+.btn-blue{
+    background-color: var(--color-light-blue);
+    color: var(--color-dark-blue);
+    font-weight: 700;
+    padding: 16px 24px;
+    width: 308px; /* Knappen tar upp hela bredden på mobilen */
+}
+
+/* Online challenges - Blå understruken textlänk (mobil) */
+.btn-red {
+    background-color: transparent; /* Ingen bakgrundsfärg */
+    color: #1a5a80;
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 8px 0;
+    width: auto; /* Automatisk plats som själva texten behöver */
+}
+
+/* Sektion 5: Recensioner */ 
+.testimonials-section {
+    padding: 30px 20px;
+    background-color: var(--bg-card);
+}
+
+.testimonials-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    display: flex;
+    flex-direction: row; /* Bild och text sida vid sida */
+    align-items: flex-start;
+    text-align: left;
+    gap: 16px;
+}
+
+/* Döljer det andra recenstionskortet på mobil */
+.testimonial-card:nth-child(2) {
+    display: none;
+}
+
+.testimonial-avatar {
+    width: 60x; /* Lagom bildstorlek på mobil */
+    height: 60px;
+    border-radius: 50%; /* Gör bilden cirkulär */
+    object-fit: cover;
+    flex-shrink: 0; /* Förhindrar att bild trycks ihop om text är lång */
+}
+
+.testimonial-text {
+    font-size: 19px;
+    font-style: italic; /* Kursiv text */ 
+    color: var(--text-dark);
+    line-height: 100%;
+}
+
+.testimonial-author {
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 8%;
+}
+
+/* Sektion 6: Popular challenges */
+.popular-section {
+    padding: 40px 0 40px 20px;
+    background-color: var(--bg-card);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding-right: 20px;
+}
+
+.challenges-grid {
+    display: flex;
+    flex-direction: row; 
+    gap: 16px;
+    margin-bottom: 32px;
+    overflow-x: auto; /* Aktiverar sidoskroll på mobil */
+    /* Korten snäpper automatiskt fast i kanten när användaren sveper */
+    scroll-snap-type: mandatory; 
+    padding-bottom: 12px;
+}
+
+/* Gömmer skrollisten så designen förblir ren */
+.challenges-grid::-webkit-scrollbar {
+    display: none;
+}
+.challenges-grid {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.challenge-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden; /* Bildens hörn blir rundade (border-radius) */
+    text-align: left;
+    flex: 0 0 85%;
+    scroll-snap-align: start; /* Kortets startkant snäpper fast i skärmkanten */
+}
+
+.challenge-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Anppassar rumsbilden till fasta höjden */
+}
+
+.challenge-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Info i kortet blir vertikal flexbox */
+}
+
+.challenge-title {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.challenge-rating {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+}
+
+.star-img {
+    width: 12px;
+    height: 12px;
+    display: block;
+}
+.participants {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.challenge-text {
+    font-size: 18px;
+    line-height: 100%;
+    margin-bottom: 20px;
+}
+
+/* Book this room knapp */
+.btn-card-red {
+    background-color: var(--color-red);
+    color: var(--text-light);
+    padding: 12px 24px;
+    border-radius: 4px;
+    align-self: flex-end; /* Trycker knappen till höger sida inuti kortet */
+    font-size: 16px;
+    width: 180px;
+    height: 44px;
+}
+
+.popular-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding-right: 20px; /* Balanserar upp knapparna på skärmen */
+}
+
+/* Sektion 7: Story teaser */
+.story-teaser-section {
+    background-color: var(--color-dark-blue);
+    padding: 40px 20px;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.story-teaser-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.story-teaser-text {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 290px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-light-blue);
+    border: 1px solid var(--color-light-blue); /* Ljusblå färg på ramlinjen */
+    padding: 8px 36px;
+    width: auto;
+}
+
+/* Sektion 8: 2 bilder med samtlig info */
+.info-split-section {
+    padding: 0 0 40px 0;
+    background-color: var(--bg-card);
+}
+
+.info-split-container {
+    display: flex;
+    flex-direction: column; /* Bild överst och text under på mobil */
+    gap: 20px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.info-split-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    display: block
+}
+
+.info-split-content {
+    padding-left: 20px;
+    padding-right: 20px ;
+}
+
+.info-split-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* Vänsterjusterar allt innehåll och tvingar knappen till vänster med */
+    align-items: flex-start; 
+}
+
+.info-split-content h2 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.info-split-content p {
+    font-size: 22px;
+    line-height: 100%; 
+    font-weight: 400;   
+}
+
+.btn-block-red {
+    background-color: var(--color-red);
+    color: var(--text-light);
+    padding: 14px 24px;
+    width: 308px; /* Knappen sträcker sig efter textens längd */
+    text-align: center;
+    border-radius: 4px;
+}
+
+/* Sektion 9: Huvudmeny */
+.main-footer {
+    background-color: var(--color-dark-blue);
+    padding: 40px 20px;
+    color: var(--text-light);
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.footer-brand h4,
+.footer-nav h4,
+.footer-social h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.footer-brand p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--color-grey);
+}
+
+.footer-nav ul,
+.footer-social ul {
+    display: flex;
+    flex-direction: column;
+    gap: 100%;
+}
+
+.footer-nav a,
+.footer-social a {
+    font-size: 18px;
+    color: var(--color-grey);
+    display: inline-block;
+}
+
+/* Tomrummet mellan 'Legal' och 'Play online' */
+.footer-nav .nav-break {
+    margin-top: 14px;
+}
+
+/* Sektion 10: Datorskärm utseende */
+@media (min-width:1280px) {
+
+    .main-header {
+        padding: 10px 20px 20px 20px;
+    }
+
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: none;
+        gap: 24px;
+    }
+
+    .logo-area {
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+    }
+    .logo-img {
+        height: 82px;
+        width: 128px;
+    }
+
+    .site-title {
+        font-size: 32px;
+        line-height: 1;
+        white-space: nowrap;
+        max-width: none;
+    }
+
+    .main-nav {
+        display: block; /* Visar länkarna på desktop */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .main-nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 100px;
+        padding: 0;
+    }
+
+    .main-nav ul li:last-child a {
+        color: var(--color-light-blue);
+    }
+
+    .main-nav a {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .hero-image-container {
+        height: 60vh; /* Ger mer höjd på datorskärmar */
+    }
+
+    .hero-section {
+        position: relative;
+    }
+
+    .hero-buttons {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%); /* Centrerar knappgruppen helt horisontellt */
+        flex-direction: row-reverse; /* Lägger knapparna bredvid varandra och byter plats på de */
+        justify-content: center;
+        gap: 24px;
+        width: auto;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .btn {
+        width: auto;
+        padding: 16px 32px;
+    }
+
+    .btn-blue {
+        width: 308px;
+        height: 66px;
+        font-size: 24px;
+    }
+
+    /* Gör om Online-challenges till en röd blockknapp */
+    .btn-red {
+        background-color: var(--color-red);
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 24px;
+        width: 308px;
+        height: 66px;
+    }
+
+    .testimonials-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: row; /* Lägger recensionerna bredvid varandra */
+    }
+
+    .testimonial-card {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .testimonial-card:nth-child(2) {
+        display: flex; /* Visar det andra kortet igen på desktop */
+    }
+
+    .testimonial-text {
+        max-width: 360px;
+    }
+
+    .challenges-grid {
+        flex-direction: row; /* Lägger de 3 korten i rad bredvid varandra */ 
+        gap: 30px;
+        overflow-x: visible; /* Stänger av skrollet på desktop */
+        padding: 0 20px;
+    }
+
+    .challenge-text {
+        max-width: 280px;
+        line-height: 100%;
+        
+    }
+
+    .challenge-card {
+        flex: 1;
+    }
+
+    /* Text som centrerats i "Book this room" knapparna" */
+    .btn-card-red {
+        display: inline-flex;
+        align-items: center; /* Centrerar texten exakt vertikalt */
+        justify-content: center; /* Centrerar texten horisontellt */
+        line-height: 1; /* Nollställer radhöjden så den inte trycker nedåt */
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .popular-buttons {
+        flex-direction: row; /* Knapparna under korten hamnar bredvid varandra */
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .story-teaser-text {
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 360px;
+    }
+
+    .info-split-section {
+        padding: 0;
+    }
+
+    .info-split-container {
+        display: flex;
+        flex-direction: row; /* Lägger bild och text sida vid sida */
+        align-items: stretch;
+        max-width: 100%;
+        gap: 0;
+    }
+
+    .info-split-image {
+        flex: 0 0 50%; /* Bild tar upp hälften av skärmbredden */
+    }
+
+    .info-split-image img {
+        width: 100%;
+        height: 460px;
+        object-fit: cover;
+        border-radius: 0;
+    }
+
+    .info-split-content {
+        flex: 0 0 50%;
+        padding: 60px 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .info-split-content h2{
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 100%;
+        max-width: 416px;
+    }
+
+    .info-split-content p {
+        font-size: 24px;
+        line-height: 100%;
+        color: var(--text-dark);
+        width: 416px;
+    }
+    .info-split-section.reverse .info-split-container {
+        flex-direction: row-reverse;
+    }
+
+    .btn-block-red {
+        width: 308px;
+        padding: 16px 32px;
+        white-space: nowrap;
+        font-size: 24px;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: row; /* Lägger footerns tre delar bredvid varandra */
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .footer-brand {
+        flex: 0 1 400px;
+    }
+
+    .footer-nav, .footer-social {
+        flex: 0 0 auto;
+        width: auto;
+    }
+
+    .footer-nav ul,
+    .footer-social ul {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-nav .nav-break {
+        margin-top: 16px;
+    }
+
+    .footer-nav a,
+    .footer-social a {
+        display: block;
+        line-height: 1.2;
+    }
+}
