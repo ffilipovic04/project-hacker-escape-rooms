@@ -46,7 +46,9 @@ img {
     display: block; /* Bilden får tomrum i botten */
 }
 
-/* MOBILE-FIRST - 480px */
+/* ==========================================================================
+   MOBILE FIRST - MENU SECTIONS (480px)
+   ========================================================================== */
 
 /* Sektion 3: Headers (Mobil-först) */
 .main-header {
@@ -86,6 +88,102 @@ img {
 .main-nav {
     display: none; 
 
+}
+
+.mobile-menu-btn, .close-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Grundstilen för ytterlagret ligger först */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: brightness(0.85);
+    -webkit-backdrop-filter: brightness(0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Gömmer allt som standard */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* När menyn öppnas slår vi på ytterlagret direkt */
+.mobile-menu-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Innerlagret (Kortet): Får en fördröjd animation inifrån och ut */
+.mobile-menu-overlay .mobile-menu-card {
+    background-color: var(--color-dark-blue);
+    /* Ger exakt den smala bredden och höjden som läraren har */
+    width: 93%;
+    height: 96%;
+    max-width: 440px;
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Startläge för animationen: osynlig och nedskalad */
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* När ytterlagret är öppet, aktivera animationen på kortet med 0.15s fördröjning */
+.mobile-menu-overlay.is-open .mobile-menu-card {
+    animation: fadeInCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.15s; /* Detta gör att hemsidan hinner bli suddig först! */
+}
+
+/* Animationen som tonar in kortet inifrån och ut */
+@keyframes fadeInCard {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Placerar krysset absolut uppe till höger i kortet */
+.close-menu-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+
+.close-menu-btn img {
+    width: 24px;
+    height: auto;
+}
+
+/* Länkarnas styling */
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.mobile-nav li {
+    margin: 40px 0; 
+}
+
+.mobile-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 700;
+    display: inline-block;
 }
 
 /* Sektion 4: Hero's */
@@ -484,6 +582,14 @@ img {
         display: block; /* Visar länkarna på desktop */
         width: 100%;
         margin-top: 10px;
+    }
+
+      .mobile-menu-btn {
+        display: none;
+    }
+
+    .mobile-menu-overlay {
+        display: none;
     }
 
     .main-nav ul {
