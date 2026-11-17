@@ -25,3 +25,10 @@ Beslut:
 - Filip: moment 1, API och kort.
 - Elin: moment 2, filter.
 - Moment 3, bokning: bestäms på nästa möte.
+
+
+## 2026-11-17 Möte
+Närvarande: Samuel, Filip, Elin, Fabian
+
+Filip visade sin kod: challenges.html och challenges.js (hämtar data från API:et och bygger korten). Han pushar dem till repot så att alla kan utgå från dem.
+Fördelning: Filip moment 1 (API och kort), Elin moment 2 (filter), Samuel och Fabian moment 3 (bokning).
