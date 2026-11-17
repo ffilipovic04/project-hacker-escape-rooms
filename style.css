@@ -672,9 +672,23 @@ img {
 
     .challenges-grid {
         flex-direction: row; /* Lägger de 3 korten i rad bredvid varandra */ 
+        flex-wrap: wrap;
         gap: 30px;
         overflow-x: visible; /* Stänger av skrollet på desktop */
         padding: 0 20px;
+    }
+
+    .challenge-card {
+        flex: 0 1 calc(33.333% - 20px);
+         min-width: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .challenge-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
     }
 
     .challenge-text {
@@ -683,11 +697,6 @@ img {
         
     }
 
-    .challenge-card {
-        flex: 1;
-    }
-
-    /* Text som centrerats i "Book this room" knapparna" */
     .btn-card-red {
         display: inline-flex;
         align-items: center; /* Centrerar texten exakt vertikalt */
@@ -695,6 +704,7 @@ img {
         line-height: 1; /* Nollställer radhöjden så den inte trycker nedåt */
         padding-top: 10px;
         padding-bottom: 10px;
+        margin-top: auto;
     }
     .popular-buttons {
         flex-direction: row; /* Knapparna under korten hamnar bredvid varandra */
