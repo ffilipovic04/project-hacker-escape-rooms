@@ -87,75 +87,7 @@
 
         <section class = "popular-section">
             <h2 class = "section-title">Popular challenges right now</h2>
-
-            <div class = "challenges-grid">
-
-                <article class = "challenge-card">
-                    <img src = "Images/Hacker-computer.png" alt = "Title of room" class = "challenge-img">
-                    <div class = "challenge-info">
-                        <h3 class = "challenge-title">Title of room (on-site)</h3>
-                        <div class = "challenge-rating">
-                            <div class = "stars">
-                                <img src = "Images/Star-1.png" alt = "Star 1" class = "star-img">
-                                <img src = "Images/Star-2.png" alt = "Star 2" class = "star-img">
-                                <img src = "Images/Star-3.png" alt = "Star 3" class = "star-img">
-                                <img src = "Images/Star-4.png" alt = "Star 4" class = "star-img">
-                                <img src = "Images/Star-5.png" alt = "Star 5" class = "star-img">
-                            </div>
-                            <span class = "participants">2-6 participants</span>
-                        </div>
-                        <p class = "challenge-text">
-                            Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-                        </p>
-                        <a href = "#" class = "btn btn-card-red">Book this room</a>
-                    </div>
-                </article>
-
-                <article class = "challenge-card">
-                    <img src = "Images/Hacker-computer.png" alt = "Title of room" class = "challenge-img">
-                    <div class = "challenge-info">
-                        <h3 class = "challenge-title">Title of room (on-site)</h3>
-                        <div class = "challenge-rating">
-                            <div class = "stars">
-                                <img src = "Images/Star-1.png" alt = "Star 1" class = "star-img">
-                                <img src = "Images/Star-2.png" alt = "Star 2" class = "star-img">
-                                <img src = "Images/Star-3.png" alt = "Star 3" class = "star-img">
-                                <img src = "Images/Star-4.png" alt = "Star 4" class = "star-img">
-                                <img src = "Images/Star-5.png" alt = "Star 5" class = "star-img">
-                            </div>
-                            <span class = "participants">2-6 participants</span>
-                        </div>
-                        <p class = "challenge-text">
-                            Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-                        </p>
-                        <a href = "#" class = "btn btn-card-red">Book this room</a>
-                    </div>
-                </article>
-
-                <article class = "challenge-card">
-                    <img src = "Images/Hacker-computer.png" alt = "Title of room" class = "challenge-img">
-                    <div class = "challenge-info">
-                        <h3 class = "challenge-title">Title of room (on-site)</h3>
-                        <div class = "challenge-rating">
-                            <div class = "stars">
-                                <img src = "Images/Star-1.png" alt = "Star 1" class = "star-img">
-                                <img src = "Images/Star-2.png" alt = "Star 2" class = "star-img">
-                                <img src = "Images/Star-3.png" alt = "Star 3" class = "star-img">
-                                <img src = "Images/Star-4.png" alt = "Star 4" class = "star-img">
-                                <img src = "Images/Star-5.png" alt = "Star 5" class = "star-img">
-                            </div>
-                            <span class = "participants">2-6 participants</span>
-                        </div>
-                        <p class = "challenge-text">
-                            Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-
-                        </p>
-                        <a href = "#" class = "btn btn-card-red">Book this room</a>
-                    </div>
-                </article>
-
-            </div>
-
+            <div id="top-challenges-container" class="challenges-grid"></div>
             <div class = "popular-buttons">
                 <a href = "#" class = "btn btn-blue">On-site challenges</a>
                 <a href = "#" class = "btn btn-red">Online challenges</a>
@@ -230,26 +162,41 @@
         </div>
     </footer>
     
-    <!-- Booking Card -->
-    <button type="button" id="close-booking" class="close-booking" aria-label="Close booking">
-        &times;
-    </button>
+       <!-- Bokningsruta som öppnas när användaren vill boka en challenge -->
+    <dialog id="booking-modal" aria-labelledby="booking-title">
 
-    <h2 id="booking-title">Book a challenge</h2>
+        <!-- Knapp för att stänga bokningsrutan -->
+        <button type="button" id="close-booking" class="close-booking" aria-label="Close booking">
+            &times;
+        </button>
 
-    <form id="booking-form">
+        <h2 id="booking-title">Book a challenge</h2>
 
-        <fieldset id="booking-step-1">
-            <legend>Choose a date</legend>
+        <!-- Formulär för bokningen -->
+        <form id="booking-form">
 
-            <label for="booking-date">Select date:</label>
-            <input type="date" id="booking-date" required>
+            <!-- Första steget: användaren väljer datum -->
+            <fieldset id="booking-step-1">
+                <legend>Choose a date</legend>
 
-            <button type="button" id="booking-next">Next</button>
-        </fieldset>
-    </form>
-    
-    <script src = "script.js"></script>
-    <script src = "booking.js"></script>
+                <label for="booking-date">Select date:</label>
+                <input type="date" id="booking-date" required>
+
+                <button type="button" id="booking-next">Next</button>
+            </fieldset>
+
+        </form>
+
+    </dialog>
+
+    <!-- JavaScript för mobilmenyn -->
+    <script src="script.js"></script>
+
+    <!-- JavaScript för att hämta och visa challenges från API -->
+    <script src="challenges.js"></script>
+
+    <!-- JavaScript för bokningsfunktionen -->
+    <script src="booking.js"></script>
+
 </body>
 </html>
