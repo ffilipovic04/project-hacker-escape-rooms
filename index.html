@@ -229,6 +229,27 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Booking Card -->
+    <button type="button" id="close-booking" class="close-booking" aria-label="Close booking">
+        &times;
+    </button>
+
+    <h2 id="booking-title">Book a challenge</h2>
+
+    <form id="booking-form">
+
+        <fieldset id="booking-step-1">
+            <legend>Choose a date</legend>
+
+            <label for="booking-date">Select date:</label>
+            <input type="date" id="booking-date" required>
+
+            <button type="button" id="booking-next">Next</button>
+        </fieldset>
+    </form>
+    
     <script src = "script.js"></script>
+    <script src = "booking.js"></script>
 </body>
 </html>
