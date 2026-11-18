@@ -1,8 +1,12 @@
-const challengeList = document.querySelector("#challenge-list");
 
-testChallenges.forEach(function (challenge) {
-  
-   const title = document.createElement ("h3"); 
-   title.textContent = challenge.title;
-   challengeList.appendChild(title);
-});
+
+const filterb = document.querySelector("#filter-toggle");
+
+filterb.addEventListener("click", filterchallenges);
+
+function filterchallenges() {
+    renderchallenges(testChallenges, 'all-challenges-container');
+}
+
+
+
