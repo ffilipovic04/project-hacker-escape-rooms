@@ -810,3 +810,90 @@ img {
         line-height: 1.2;
     }
 }
+
+/* Sektion 11: Bokningsruta (Mobile first) */
+
+/* Bokningsrutan som visas ovanpå webbsidan */
+#booking-modal {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    padding: 30px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--bg-card);
+    color: var(--text-dark);
+    overflow-y: auto;
+    
+}
+/* Mörkar ner webbsidan bakom bokningsrutan */
+#booking-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/* Stängningsknappen uppe till höger */
+.close-booking {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--color-dark-blue);
+    font-size: 30px;
+    cursor: pointer;
+}
+/* Rubriken i bokningsrutan */
+#booking-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+    padding-right: 30px;
+}
+/* Grupperar datumfältet och knappen */
+#booking-step-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: none;
+}
+/* Rubriken för datumvalet */
+#booking-step-1 legend {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* Datumfältet */
+#booking-date {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-grey);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+/* Knappen för att gå vidare i bokningen */
+#booking-next {
+    background-color: var(--color-red);
+    color: var(--text-light);
+    border: none;
+    border-radius: 4px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Anpassningar för större skärmar */
+@media (min-width: 1280px) {
+
+    #booking-modal {
+        padding: 40px;
+    }
+
+    #booking-title {
+        font-size: 28px;
+    }
+}
