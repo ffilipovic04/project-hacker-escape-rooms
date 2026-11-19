@@ -1,0 +1,11 @@
+#filter-panel {
+display: none;
+}
+
+#filter-panel.open {
+    display: block;
+    background-color:#789789 ;
+    padding: 35px;
+
+
+}
