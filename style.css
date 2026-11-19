@@ -819,70 +819,89 @@ img {
     inset: 0;
     margin: auto;
     width: 90%;
-    max-width: 500px;
+    max-width: 440px;
+    min-height: 375px;
     max-height: 90vh;
-    padding: 30px 20px;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--bg-card);
-    color: var(--text-dark);
+    padding: 20px 24px;
+    border: 1px solid #607080;
+    border-radius: 0;
+    background-color: #293946;
+    color: var(--text-light);
     overflow-y: auto;
-    
 }
+
 /* Mörkar ner webbsidan bakom bokningsrutan */
 #booking-modal::backdrop {
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 /* Stängningsknappen uppe till höger */
 .close-booking {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 12px;
+    right: 14px;
     background: none;
     border: none;
-    color: var(--color-dark-blue);
-    font-size: 30px;
+    color: var(--text-light);
+    font-size: 24px;
     cursor: pointer;
 }
+
 /* Rubriken i bokningsrutan */
 #booking-title {
-    font-size: 24px;
+    font-size: 16px;
+    font-weight: 500;
     margin-bottom: 24px;
-    padding-right: 30px;
+    padding-right: 24px;
 }
+
 /* Grupperar datumfältet och knappen */
 #booking-step-1 {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 8px;
     border: none;
+    min-width: 0;
 }
-/* Rubriken för datumvalet */
+
+/* Frågan ovanför datumfältet */
 #booking-step-1 legend {
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+}
+
+/* Texten Date */
+#booking-step-1 label {
+    font-size: 12px;
 }
 
 /* Datumfältet */
 #booking-date {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--color-grey);
-    border-radius: 4px;
+    width: 128px;
+    max-width: 100%;
+    padding: 6px;
+    border: 1px solid #9aa9b5;
+    border-radius: 3px;
+    background-color: transparent;
+    color: var(--text-light);
     font-family: inherit;
-    font-size: 16px;
+    font-size: 12px;
+    color-scheme: dark;
 }
 
-/* Knappen för att gå vidare i bokningen */
+/* Knappen längst ner till höger */
 #booking-next {
-    background-color: var(--color-red);
+    align-self: flex-end;
+    margin-top: 190px;
+    background-color: #4c27cf;
     color: var(--text-light);
     border: none;
-    border-radius: 4px;
-    padding: 14px 24px;
-    font-size: 16px;
-    font-weight: 700;
+    border-radius: 3px;
+    padding: 9px 12px;
+    font-size: 11px;
+    font-weight: 500;
     cursor: pointer;
 }
 
@@ -890,10 +909,7 @@ img {
 @media (min-width: 1280px) {
 
     #booking-modal {
-        padding: 40px;
-    }
-
-    #booking-title {
-        font-size: 28px;
+        width: 440px;
+        min-height: 375px;
     }
 }

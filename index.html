@@ -170,19 +170,21 @@
             &times;
         </button>
 
-        <h2 id="booking-title">Book a challenge</h2>
+        <h2 id="booking-title">Book room (step 1)</h2>
 
         <!-- Formulär för bokningen -->
         <form id="booking-form">
 
             <!-- Första steget: användaren väljer datum -->
             <fieldset id="booking-step-1">
-                <legend>Choose a date</legend>
+                <legend>What date would you like to come?</legend>
 
-                <label for="booking-date">Select date:</label>
+                <label for="booking-date">Date</label>
                 <input type="date" id="booking-date" required>
 
-                <button type="button" id="booking-next">Next</button>
+                <button type="button" id="booking-next">
+                    Search available times
+                </button>
             </fieldset>
 
         </form>
