@@ -71,7 +71,7 @@ bookingDate.min = `${year}-${month}-${day}`;
 const bookingNextButton = document.getElementById('booking-next');
 
 // Lyssnar efter klick på Next-knappen
-bookingNextButton.addEventListener('click', () => {
+bookingNextButton.addEventListener('click',async () => {
 
     // Kontrollerar om användaren har valt ett giltigt datum
     if (!bookingDate.checkValidity()) {
@@ -82,18 +82,51 @@ bookingNextButton.addEventListener('click', () => {
         // Avslutar funktionen om datumet är ogiltigt
         return;
     }
-    // Tillfälligt meddelande för att kontrollera att datumvalet fungerar
-    console.log('Valt datum:', bookingDate.value);
-    // Visar vilken challenge användaren har valt
-    console.log('Vald challenge:', selectedChallengeId);
-    // Hämtar lediga tider för vald challenge och datum
-    getAvailableTimes(selectedChallengeId, bookingDate.value);
-});
+    // Hämtar lediga tider och väntar på API-svaret
+    const availableTimes = await getAvailableTimes(
+    selectedChallengeId,
+    bookingDate.value
+);
 
-// Funktion som ska hämta lediga tider för en challenge
-async function getAvailableTimes(challengeId, date) {
+    // Visar arrayen som senare ska användas i steg 2
+    console.log('Tider till steg 2:', availableTimes);
+});
     
-    // Visar vilka uppgifter som ska skickas till API:et
-    console.log("Hämtar tider för challenge", challengeId);
-    console.log("Datum", date);
+// Hämtar lediga tider för vald challenge och datum
+async function getAvailableTimes(challengeId, date) {
+     // Kontrollerar att funktionen faktiskt körs
+    console.log('Funktionen getAvailableTimes körs!');
+
+    // Skapar API-adressen med challenge-ID och valt datum
+    const url = `https://lernia-sjj-assignments.vercel.app/api/booking/available-times?challenge=${challengeId}&date=${date}`;
+
+    try {
+        // Skickar en förfrågan till API:et
+        const response = await fetch(url);
+
+        // Kontrollerar om API:et svarade med ett fel
+        if (!response.ok) {
+            throw new Error('Kunde inte hämta lediga tider');
+        }
+
+        // Omvandlar svaret från JSON till ett JavaScript-objekt
+        const data = await response.json();
+
+        // Tar bort eventuella dubbletter från de lediga tiderna
+        const availableTimes = [...new Set(data.slots)];
+
+        // Visar tiderna i konsolen för testning
+        console.log('Lediga tider:', availableTimes);
+
+        // Returnerar tiderna så att de kan användas i nästa steg
+        return availableTimes;
+
+    } catch (error) {
+
+        // Visar ett felmeddelande om något går fel
+        console.error('Fel vid hämtning av tider:', error);
+
+        // Returnerar en tom array om hämtningen misslyckas
+        return [];
+    }
 }

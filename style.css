@@ -913,3 +913,14 @@ img {
         min-height: 375px;
     }
 }
+/* Felmeddelande i bokningsrutan */
+#booking-error {
+    color: #ffb3b3;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* Säkerställer att dolda felmeddelanden inte visas */
+#booking-error[hidden] {
+    display: none;
+}
