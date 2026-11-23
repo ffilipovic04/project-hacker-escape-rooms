@@ -21,9 +21,19 @@ onsiteChallenges.addEventListener("change", applyFilters);
 
 function applyFilters() {
     const matchingChallenges = testChallenges.filter(function (challenge) {
-        return (onlineChallenges.checked && challenge.type === "online") ||
-               (onsiteChallenges.checked && challenge.type === "onsite");
+       return matchesType (challenge);
     });
 
     renderchallenges(matchingChallenges, 'all-challenges-container');
 }
+
+function matchesType(challenge) {
+    if (!onlineChallenges.checked && !onsiteChallenges.checked) {
+        return true;
+    }
+    return(
+(onlineChallenges.checked && challenge.type === "online")||
+(onsiteChallenges.checked && challenge.type === "onsite")
+    ); 
+}
+
