@@ -32,3 +32,13 @@ Närvarande: Samuel, Filip, Elin, Fabian
 
 Filip visade sin kod: challenges.html och challenges.js (hämtar data från API:et och bygger korten). Han pushar dem till repot så att alla kan utgå från dem.
 Fördelning: Filip moment 1 (API och kort), Elin moment 2 (filter), Samuel och Fabian moment 3 (bokning).
+
+
+
+2026-11-23 Uppdatering (via chatt)
+- Elin: filtret. Typfilter klart, pull request till main i dag. Rating, etiketter och fritext tisdag–onsdag.
+- Samuel: B.8 "No matching challenges", 4.1 testning (TESTING.md), 4.2 buggfix.
+- Fabian: bokning steg 1 klar (popup, datumval, getAvailableTimes hämtar lediga tider).
+- Yasir: bokning steg 2 (formulär med namn, e-post, tid, deltagare) och koppling till lediga tider.
+- Möte tisdag 24/11
+- Redovisning och inlämning fredag 27/11.
