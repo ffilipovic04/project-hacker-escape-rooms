@@ -90,6 +90,26 @@ bookingNextButton.addEventListener('click',async () => {
 
     // Visar arrayen som senare ska användas i steg 2
     console.log('Tider till steg 2:', availableTimes);
+    
+    // Hämtar elementet där felmeddelanden ska visas
+    const bookingError = document.getElementById('booking-error');
+
+    // Döljer tidigare felmeddelanden
+    bookingError.hidden = true;
+
+    // Kontrollerar om API-anropet misslyckades
+    if (availableTimes === null) {
+        bookingError.textContent = 'Could not load available times. Please try again.';
+        bookingError.hidden = false;
+        return;
+}
+
+    // Kontrollerar om det saknas lediga tider
+    if (availableTimes.length === 0) {
+        bookingError.textContent = 'No available times for this date.';
+        bookingError.hidden = false;
+        return;
+    }
 });
     
 // Hämtar lediga tider för vald challenge och datum
@@ -127,6 +147,6 @@ async function getAvailableTimes(challengeId, date) {
         console.error('Fel vid hämtning av tider:', error);
 
         // Returnerar en tom array om hämtningen misslyckas
-        return [];
+        return null;
     }
 }
