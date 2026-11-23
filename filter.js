@@ -18,6 +18,12 @@ const onsiteChallenges =document.querySelector("#onsite-checkbox");
 onlineChallenges.addEventListener("change", applyFilters);
 onsiteChallenges.addEventListener("change", applyFilters);
 
-function applyFilters() {
 
+function applyFilters() {
+    const matchingChallenges = testChallenges.filter(function (challenge) {
+        return (onlineChallenges.checked && challenge.type === "online") ||
+               (onsiteChallenges.checked && challenge.type === "onsite");
+    });
+
+    renderchallenges(matchingChallenges, 'all-challenges-container');
 }
