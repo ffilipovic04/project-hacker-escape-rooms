@@ -1,3 +1,4 @@
+let allChallenges = [];
 // Vänta tills hela HTML-sidan har laddats in helt, starta sedan funktionen som heter init. 
 document.addEventListener('DOMContentLoaded', () => {
     init();
@@ -12,6 +13,7 @@ async function init() {
         const data = await response.json();
         // Lista med alla rum ligger i variabeln "challenges"
         const challenges = data.challenges;
+        allChallenges = challenges; 
 
         // Kollar om webbläsaren hittar ett ID som heter 'top-challenges-container' på sidan.
         // Om det finns, är användaren inna på "index.html"
