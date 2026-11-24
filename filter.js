@@ -1,5 +1,3 @@
-
-
 const filterb = document.querySelector("#filter-toggle");
 
 filterb.addEventListener("click", filterchallenges);
@@ -21,10 +19,10 @@ onsiteChallenges.addEventListener("change", applyFilters);
 
 function applyFilters() {
     const matchingChallenges = testChallenges.filter(function (challenge) {
-       return matchesType (challenge);
+        return matchesType(challenge) && matchesRating(challenge);
     });
 
-    renderchallenges(matchingChallenges, 'all-challenges-container');
+    renderchallenges(matchingChallenges, "all-challenges-container");
 }
 
 function matchesType(challenge) {
@@ -37,3 +35,21 @@ function matchesType(challenge) {
     ); 
 }
 
+const ratingStars = document.querySelectorAll (".star");
+
+let ratingFrom = 0; 
+
+ratingStars.forEach(function (star) {
+  star.addEventListener("click", function () {
+  ratingFrom = Number(star.dataset.value);
+  applyFilters();
+});
+
+});
+
+//skiss//
+
+function matchesRating (challenge) {
+return challenge.rating >= ratingFrom ;
+
+}
