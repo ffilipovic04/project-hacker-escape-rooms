@@ -339,6 +339,8 @@ img {
     text-align: left;
     flex: 0 0 85%;
     scroll-snap-align: start; /* Kortets startkant snäpper fast i skärmkanten */
+    display: flex;
+    flex-direction: column;
 }
 
 .challenge-img {
@@ -351,6 +353,7 @@ img {
     padding: 20px;
     display: flex;
     flex-direction: column; /* Info i kortet blir vertikal flexbox */
+    flex-grow: 1;
 }
 
 .challenge-title {
@@ -398,6 +401,7 @@ img {
     font-size: 16px;
     width: 180px;
     height: 44px;
+    margin-top: auto;
 }
 
 .popular-buttons {
