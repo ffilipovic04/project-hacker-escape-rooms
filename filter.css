@@ -24,3 +24,16 @@ cursor: pointer;
 }
 
 
+.star,.star-to {
+   
+    background: none;
+   border: none;
+   font-size: 24px;
+   color: lightgray;
+   cursor: pointer;
+}
+
+.star.active,
+.star-to.active {
+    color: var(--color-red);
+}

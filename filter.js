@@ -64,3 +64,6 @@ function matchesRating (challenge) {
 return challenge.rating >= ratingFrom ;
 
 }
+
+
+star.to 
