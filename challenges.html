@@ -1,47 +1,98 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hacker Escape Rooms</title>
-    <link rel='stylesheet' href='style.css'>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #challenge-filters {
+    box-sizing: border-box;
+    width: calc(100% - 2rem);
+    max-width: 640px;
+    margin: 1rem auto;
+}
+
+#challenge-filters fieldset {
+    min-width: 0;
+    margin: 0 0 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#challenge-labels label {
+    display: inline-block;
+    margin: 0.25rem;
+}
+        .rating-filter label:has(input[aria-label]) {
+            position: relative;
+            display: inline-grid;
+            place-items: center;
+            min-width: 2rem;
+            min-height: 2rem;
+            cursor: pointer;
+        }
+
+        .rating-filter input[aria-label] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .rating-filter .rating-star {
+            font-size: 1.5rem;
+        }
+
+        .rating-filter .filled,
+        .rating-filter label:has(input:checked) .empty,
+        .rating-filter label:has(~ label input:checked) .empty {
+            display: none;
+        }
+
+        .rating-filter label:has(input:checked) .filled,
+        .rating-filter label:has(~ label input:checked) .filled {
+            display: inline;
+        }
+
+        .rating-filter label:has(input:focus-visible) {
+            outline: 2px solid currentColor;
+        }
+    </style>
 </head>
 <body>
-
-    <header class = "main-header">
-        <div class = "header-container">
-            <div class = "logo-area">
-                <img src = "Images/Esc-logo.png" alt = " [ESC] Hacker Escape Rooms Logo" class = "logo-img">
-                <span class = "site-title">Hacker Escape Rooms</span>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <img src="Images/Esc-logo.png" alt="[ESC] Hacker Escape Rooms Logo" class="logo-img">
+                <span class="site-title">Hacker Escape Rooms</span>
             </div>
 
-            <button id = "open-menu-btn" class = "mobile-menu-btn" aria-label = "Öppna meny">
-                <img src = "Images/Menu-botton.png" alt = "Menyikon">
+            <button id="open-menu-btn" class="mobile-menu-btn" aria-label="Öppna meny">
+                <img src="Images/Menu-botton.png" alt="Menyikon">
             </button>
 
-            <nav class = "main-nav">
+            <nav class="main-nav">
                 <ul>
-                    <li><a href = "#">Play online</a></li>
-                    <li><a href = "#">Play on-site</a></li>
-                    <li><a href = "#">The story</a></li>
-                    <li><a href = "#">Contact us</a></li>
+                    <li><a href="#">Play online</a></li>
+                    <li><a href="#">Play on-site</a></li>
+                    <li><a href="#">The story</a></li>
+                    <li><a href="#">Contact us</a></li>
                 </ul>
             </nav>
         </div>
 
-        <div id = "mobile-overlay" class = "mobile-menu-overlay">
-            <div class = "mobile-menu-card">
-                <button id = "close-menu-btn" class = "close-menu-btn" aria-label = "Stäng meny">
-                    <img src = "Images/Close-menu-button.png" alt = "Stäng meny">
+        <div id="mobile-overlay" class="mobile-menu-overlay">
+            <div class="mobile-menu-card">
+                <button id="close-menu-btn" class="close-menu-btn" aria-label="Stäng meny">
+                    <img src="Images/Close-menu-button.png" alt="Stäng meny">
                 </button>
 
-                <nav class = "mobile-nav">
+                <nav class="mobile-nav">
                     <ul>
-                        <li><a href = "#">Play online</a></li>
-                        <li><a href = "#">Play on-site</a></li>
-                        <li><a href = "#">The story</a></li>
-                        <li><a href = "#">Contact us</a></li>
+                        <li><a href="#">Play online</a></li>
+                        <li><a href="#">Play on-site</a></li>
+                        <li><a href="#">The story</a></li>
+                        <li><a href="#">Contact us</a></li>
                     </ul>
                 </nav>
             </div>
@@ -49,149 +100,212 @@
     </header>
 
     <main>
-        
-        <section class = "hero-section">
-            <div class = "hero-image-container">
-                <div class = "hero-buttons">
-                    <a href="#" class = "btn btn-blue">On-site challenges</a>
-                    <a href="#" class = "btn btn-red">Online challenges</a>
+        <section class="hero-section">
+            <div class="hero-image-container">
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-blue">On-site challenges</a>
+                    <a href="#" class="btn btn-red">Online challenges</a>
                 </div>
             </div>
         </section>
-        
-        <section class = "testimonials-section">
-            <div class = "testimonials-container">
 
-                <article class = "testimonial-card">
-                    <img src = "Images/John-Doe.png" alt = "John Doe" class = "testimonial-avatar">
-                    <div class = "testimonial-content">
-                        <blockquote class = "testimonial-text">
+        <section class="testimonials-section">
+            <div class="testimonials-container">
+                <article class="testimonial-card">
+                    <img src="Images/John-Doe.png" alt="John Doe" class="testimonial-avatar">
+                    <div class="testimonial-content">
+                        <blockquote class="testimonial-text">
                             This is a quote about how amazing this place is and how much fun me and my friends had when we tried it
                         </blockquote>
-                        <cite class = "testimonial-author">John Doe, visited us in September 2021</cite>
+                        <cite class="testimonial-author">John Doe, visited us in September 2021</cite>
                     </div>
                 </article>
 
-                <article class = "testimonial-card">
-                    <img src = "Images/John-Doe.png" alt = "John Doe" class = "testimonial-avatar">
-                    <div class = "testimonial-content">
-                        <blockquote class = "testimonial-text">
-                            This is a quote about how amazing this place is and how much fun me and my friends had when we tried it                 
+                <article class="testimonial-card">
+                    <img src="Images/John-Doe.png" alt="John Doe" class="testimonial-avatar">
+                    <div class="testimonial-content">
+                        <blockquote class="testimonial-text">
+                            This is a quote about how amazing this place is and how much fun me and my friends had when we tried it
                         </blockquote>
-                        <cite class = "testimonial-author">John Doe, visited us in September 2021</cite>
+                        <cite class="testimonial-author">John Doe, visited us in September 2021</cite>
                     </div>
                 </article>
-
             </div>
         </section>
 
-        <section class = "popular-section">
-            <h2 class = "section-title">Our challenges</h2>
+        <section class="popular-section">
+            <h2 class="section-title">Our challenges</h2>
+
+            <button id="toggle-challenge-filters" type="button"
+                    aria-expanded="false" aria-controls="challenge-filters">
+                Filter challenges
+            </button>
+
+            <div id="challenge-filters" hidden>
+                <fieldset>
+                    <legend>Challenge type</legend>
+                    <label><input name="challenge-type" type="checkbox" value="online" checked> Online</label>
+                    <label><input name="challenge-type" type="checkbox" value="onsite" checked> On-site</label>
+                </fieldset>
+
+                <fieldset class="rating-filter">
+                    <legend>Minimum rating</legend>
+                    <label><input name="min-rating" type="radio" value="0" checked> Any</label>
+                    <label>
+                        <input name="min-rating" type="radio" value="1" aria-label="1 star">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="min-rating" type="radio" value="2" aria-label="2 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="min-rating" type="radio" value="3" aria-label="3 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="min-rating" type="radio" value="4" aria-label="4 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="min-rating" type="radio" value="5" aria-label="5 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                </fieldset>
+
+                <fieldset class="rating-filter">
+                    <legend>Maximum rating</legend>
+                    <label>
+                        <input name="max-rating" type="radio" value="1" aria-label="1 star">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="max-rating" type="radio" value="2" aria-label="2 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="max-rating" type="radio" value="3" aria-label="3 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="max-rating" type="radio" value="4" aria-label="4 stars">
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                    <label>
+                        <input name="max-rating" type="radio" value="5" aria-label="5 stars" checked>
+                        <span class="rating-star empty" aria-hidden="true">☆</span>
+                        <span class="rating-star filled" aria-hidden="true">★</span>
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Labels</legend>
+                    <div id="challenge-labels"></div>
+                </fieldset>
+
+                <label for="challenge-search">Search challenges</label>
+                <input id="challenge-search" type="search">
+            </div>
+
+            <p id="no-matching-challenges" role="status" hidden>No matching challenges</p>
             <div id="all-challenges-container" class="challenges-grid"></div>
         </section>
 
-        <section class = "story-teaser-section">
-            <div class = "story-teaser-container">
-                <p class = "story-teaser-text">
+        <section class="story-teaser-section">
+            <div class="story-teaser-container">
+                <p class="story-teaser-text">
                     Quodsi haberent magnalia inter potentiam et divitias, et non illam quidem haec eo spectant haec quoque vos omnino desit illud quo solo felicitatis libertatisque perficiuntur.
                 </p>
-                <a href = "#" class = "btn btn-outline">Read the full story</a>
+                <a href="#" class="btn btn-outline">Read the full story</a>
             </div>
         </section>
 
-        <section class ="info-split-section">
-            <div class = "info-split-container">
-                <div class = "info-split-image">
-                    <img src = "Images/2-persons-watching-code.jpg" alt = "People hacking together">
+        <section class="info-split-section">
+            <div class="info-split-container">
+                <div class="info-split-image">
+                    <img src="Images/2-persons-watching-code.jpg" alt="People hacking together">
                 </div>
-                <div class = "info-split-content">
+                <div class="info-split-content">
                     <h2>Play with your friends or build your team stronger at work</h2>
-                    <p>
-                        Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-                    </p>
-                    <a href = "#" class = "btn btn-block-red">Book on-site today</a>
+                    <p>Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et</p>
+                    <a href="#" class="btn btn-block-red">Book on-site today</a>
                 </div>
             </div>
         </section>
 
-        <section class = "info-split-section reverse">
-            <div class = "info-split-container">
-                <div class = "info-split-image">
-                    <img src = "Images/woman-screen.jpg" alt = "Woman looking at screen">
+        <section class="info-split-section reverse">
+            <div class="info-split-container">
+                <div class="info-split-image">
+                    <img src="Images/woman-screen.jpg" alt="Woman looking at screen">
                 </div>
-                <div class = "info-split-content">
+                <div class="info-split-content">
                     <h2>Play online or visit our venue for one of our 25 escape rooms</h2>
-                    <p>
-                    Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-                    </p>
-                    <a href = "#" class = "btn btn-block-red">See all challenges</a>
+                    <p>Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et</p>
+                    <a href="#" class="btn btn-block-red">See all challenges</a>
                 </div>
             </div>
         </section>
-
     </main>
-    
-    <footer class = "main-footer">
-        <div class = "footer-container">
-            <div class = "footer-brand">
-                <h4 class = "footer-brand-title">[Esc] Hacker Escape Rooms</h4>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h4 class="footer-brand-title">[Esc] Hacker Escape Rooms</h4>
                 <p>Quodsi haberent magnalia inter potentiam et divitias, et non illam quidem haec eo spectant haec quoque vos omnino desit illud quo solo felicitatis libertatisque perficiuntur.</p>
             </div>
-            <div class ="footer-nav">
+            <div class="footer-nav">
                 <h4>Site map</h4>
                 <ul>
-                    <li><a href = "#">The Story</a></li>
-                    <li><a href = "#">Contact us</a></li>
-                    <li><a href = "#">Legal</a></li>
-                    <li class = "nav-break"><a href = "#">Play online</a></li>
-                    <li><a href = "#">Play on-site</a></li>
+                    <li><a href="#">The Story</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Legal</a></li>
+                    <li class="nav-break"><a href="#">Play online</a></li>
+                    <li><a href="#">Play on-site</a></li>
                 </ul>
             </div>
-            <div class = "footer-social">
+            <div class="footer-social">
                 <h4>Follow us on</h4>
                 <ul>
-                    <li><a href = "#">Facebook</a></li>
-                    <li><a href = "#">Instagram</a></li>
-                    <li><a href = "#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
-     <!-- Bokningsruta som öppnas när användaren vill boka en challenge -->
+    <!-- Bokningsruta som öppnas när användaren vill boka en challenge -->
     <dialog id="booking-modal" aria-labelledby="booking-title">
-
-        <!-- Knapp för att stänga bokningsrutan -->
         <button type="button" id="close-booking" class="close-booking" aria-label="Close booking">
             &times;
         </button>
 
         <h2 id="booking-title">Book room (step 1)</h2>
 
-        <!-- Formulär för bokningen -->
         <form id="booking-form">
-
-            <!-- Första steget: användaren väljer datum -->
             <fieldset id="booking-step-1">
                 <legend>What date would you like to come?</legend>
 
                 <label for="booking-date">Date</label>
                 <input type="date" id="booking-date" required>
-                
-                <!-- Visar meddelanden om bokningstiderna inte kan hämtas -->
+
                 <p id="booking-error" role="alert" hidden></p>
 
-                <button type="button" id="booking-next">
-                    Search available times
-                </button>
+                <button type="button" id="booking-next">Search available times</button>
             </fieldset>
-
         </form>
-
     </dialog>
 
-    
-    <script src = "script.js"></script>
+    <script src="script.js"></script>
     <script src="challenges.js"></script>
     <script src="booking.js"></script>
 </body>
