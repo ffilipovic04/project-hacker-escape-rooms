@@ -4,10 +4,34 @@
 
 #filter-panel.open {
   display: block;
-  background-color: #789789;
   padding: 35px;
 }
 
+.star {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.star.active {
+  color: var(--color-red);
+}
+
+.star,
+.star-to {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.star.active,
+.star-to.active {
+  color: var(--color-red);
+}
 .no-matches {
   grid-column: 1 / -1;
   width: 100%;

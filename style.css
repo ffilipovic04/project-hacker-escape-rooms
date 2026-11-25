@@ -810,3 +810,117 @@ img {
         line-height: 1.2;
     }
 }
+
+/* Sektion 11: Bokningsruta (Mobile first) */
+
+/* Bokningsrutan som visas ovanpå webbsidan */
+#booking-modal {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: 90%;
+    max-width: 440px;
+    min-height: 375px;
+    max-height: 90vh;
+    padding: 20px 24px;
+    border: 1px solid #607080;
+    border-radius: 0;
+    background-color: #293946;
+    color: var(--text-light);
+    overflow-y: auto;
+}
+
+/* Mörkar ner webbsidan bakom bokningsrutan */
+#booking-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Stängningsknappen uppe till höger */
+.close-booking {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Rubriken i bokningsrutan */
+#booking-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    padding-right: 24px;
+}
+
+/* Grupperar datumfältet och knappen */
+#booking-step-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    border: none;
+    min-width: 0;
+}
+
+/* Frågan ovanför datumfältet */
+#booking-step-1 legend {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Texten Date */
+#booking-step-1 label {
+    font-size: 12px;
+}
+
+/* Datumfältet */
+#booking-date {
+    width: 128px;
+    max-width: 100%;
+    padding: 6px;
+    border: 1px solid #9aa9b5;
+    border-radius: 3px;
+    background-color: transparent;
+    color: var(--text-light);
+    font-family: inherit;
+    font-size: 12px;
+    color-scheme: dark;
+}
+
+/* Knappen längst ner till höger */
+#booking-next {
+    align-self: flex-end;
+    margin-top: 190px;
+    background-color: #4c27cf;
+    color: var(--text-light);
+    border: none;
+    border-radius: 3px;
+    padding: 9px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Anpassningar för större skärmar */
+@media (min-width: 1280px) {
+
+    #booking-modal {
+        width: 440px;
+        min-height: 375px;
+    }
+}
+/* Felmeddelande i bokningsrutan */
+#booking-error {
+    color: #ffb3b3;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* Säkerställer att dolda felmeddelanden inte visas */
+#booking-error[hidden] {
+    display: none;
+}

@@ -41,11 +41,18 @@ let ratingFrom = 0;
 ratingStars.forEach(function (star) {
   star.addEventListener("click", function () {
     ratingFrom = Number(star.dataset.value);
+
+    ratingStars.forEach(function (oneStar) {
+      if (Number(oneStar.dataset.value) <= ratingFrom) {
+        oneStar.classList.add("active");
+      } else {
+        oneStar.classList.remove("active");
+      }
+    });
+
     applyFilters();
   });
 });
-
-//skiss//
 
 function matchesRating(challenge) {
   return challenge.rating >= ratingFrom;

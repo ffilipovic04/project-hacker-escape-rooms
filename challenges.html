@@ -79,6 +79,15 @@
           <button type="button" class="star" data-value="3">★</button>
           <button type="button" class="star" data-value="4">★</button>
           <button type="button" class="star" data-value="5">★</button>
+
+          <br />
+
+          <span>to</span>
+          <button type="button" class="star-to" data-value="1">★</button>
+          <button type="button" class="star-to" data-value="2">★</button>
+          <button type="button" class="star-to" data-value="3">★</button>
+          <button type="button" class="star-to" data-value="4">★</button>
+          <button type="button" class="star-to" data-value="5">★</button>
         </div>
 
         <div id="all-challenges-container" class="challenges-grid"></div>
@@ -115,8 +124,43 @@
         </div>
       </div>
     </footer>
+
+    <!-- Bokningsruta som öppnas när användaren vill boka en challenge -->
+    <dialog id="booking-modal" aria-labelledby="booking-title">
+      <!-- Knapp för att stänga bokningsrutan -->
+      <button
+        type="button"
+        id="close-booking"
+        class="close-booking"
+        aria-label="Close booking"
+      >
+        &times;
+      </button>
+
+      <h2 id="booking-title">Book room (step 1)</h2>
+
+      <!-- Formulär för bokningen -->
+      <form id="booking-form">
+        <!-- Första steget: användaren väljer datum -->
+        <fieldset id="booking-step-1">
+          <legend>What date would you like to come?</legend>
+
+          <label for="booking-date">Date</label>
+          <input type="date" id="booking-date" required />
+
+          <!-- Visar meddelanden om bokningstiderna inte kan hämtas -->
+          <p id="booking-error" role="alert" hidden></p>
+
+          <button type="button" id="booking-next">
+            Search available times
+          </button>
+        </fieldset>
+      </form>
+    </dialog>
+
     <script src="script.js"></script>
     <script src="challenges.js"></script>
+    <script src="booking.js"></script>
     <script src="test-data.js"></script>
     <script src="no-matches.js"></script>
     <script src="filter.js"></script>
