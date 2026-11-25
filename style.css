@@ -924,3 +924,6 @@ img {
 #booking-error[hidden] {
     display: none;
 }
+#booking-modal fieldset[hidden] {
+    display: none;
+}

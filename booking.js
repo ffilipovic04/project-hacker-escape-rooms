@@ -110,6 +110,23 @@ bookingNextButton.addEventListener('click',async () => {
         bookingError.hidden = false;
         return;
     }
+    const step1 = document.getElementById('booking-step-1');
+const step2 = document.getElementById('booking-step-2');
+const timeSelect = document.getElementById('booking-time');
+
+timeSelect.replaceChildren(new Option('Choose a time', ''));
+
+for (const time of availableTimes) {
+    timeSelect.add(new Option(time, time));
+}
+
+step1.hidden = true;
+step1.disabled = true;
+step2.hidden = false;
+step2.disabled = false;
+
+document.getElementById('booking-title').textContent = 'Book room (step 2)';
+document.getElementById('booking-name').focus();
 });
     
 // Hämtar lediga tider för vald challenge och datum
