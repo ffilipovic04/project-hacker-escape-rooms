@@ -59,11 +59,23 @@ ratingStars.forEach(function (star) {
 });
 });
 
-
 function matchesRating (challenge) {
-return challenge.rating >= ratingFrom ;
-
+return challenge.rating >= ratingFrom && challenge.rating <= ratingTo;
 }
 
+const ratingToStars = document.querySelectorAll(".star-to");
+let ratingTo = 5;
+ratingToStars.forEach(function (star){
+    star.addEventListener("click", function () {
+ratingTo = Number (star.dataset.value);
 
-star.to 
+ratingToStars.forEach (function (oneStar) {
+if (Number (oneStar.dataset.value) <= ratingTo) {
+oneStar.classList.add("active");
+} else {
+    oneStar.classList.remove ("active");
+    }  
+});
+applyFilters(); 
+});
+});
