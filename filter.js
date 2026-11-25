@@ -18,7 +18,7 @@ onsiteChallenges.addEventListener("change", applyFilters);
 
 
 function applyFilters() {
-    const matchingChallenges = testChallenges.filter(function (challenge) {
+        const matchingChallenges = allChallenges.filter(function (challenge) {
         return matchesType(challenge) && matchesRating(challenge) && matchesText(challenge);
     });
 
