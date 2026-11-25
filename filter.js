@@ -19,7 +19,7 @@ onsiteChallenges.addEventListener("change", applyFilters);
 
 function applyFilters() {
     const matchingChallenges = testChallenges.filter(function (challenge) {
-        return matchesType(challenge) && matchesRating(challenge);
+        return matchesType(challenge) && matchesRating(challenge) && matchesText(challenge);
     });
 
     renderchallenges(matchingChallenges, "all-challenges-container");
@@ -59,8 +59,8 @@ ratingStars.forEach(function (star) {
 });
 });
 
-function matchesRating (challenge) {
-return challenge.rating >= ratingFrom && challenge.rating <= ratingTo;
+function matchesRating(challenge) {
+    return challenge.rating >= ratingFrom && challenge.rating <= ratingTo;
 }
 
 const ratingToStars = document.querySelectorAll(".star-to");
@@ -79,3 +79,17 @@ oneStar.classList.add("active");
 applyFilters(); 
 });
 });
+
+const searchInput = document.querySelector("#search-text");
+searchInput.addEventListener("input", applyFilters);
+
+function matchesText(challenge){
+const text = searchInput.value.toLowerCase();
+const title = challenge.title.toLowerCase();
+const description = challenge.description.toLowerCase();
+
+return title.includes(text) || description.includes(text);
+
+
+
+}
