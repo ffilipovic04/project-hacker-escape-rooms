@@ -115,7 +115,10 @@ function createChallengeCard(challenge) {
     article.querySelector('.challenge-text').textContent = challenge.description;
     article.querySelector('.participants').textContent =
         challenge.minParticipants + '-' + challenge.maxParticipants + ' participants';
-    article.querySelector('.btn-card-red').dataset.id = challenge.id;
+    const bookingButton = article.querySelector('.btn-card-red');
+bookingButton.dataset.id = challenge.id;
+bookingButton.dataset.minParticipants = challenge.minParticipants;
+bookingButton.dataset.maxParticipants = challenge.maxParticipants;
 
     const stars = article.querySelector('.stars');
     stars.setAttribute('role', 'img');
