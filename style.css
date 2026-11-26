@@ -928,33 +928,3 @@ img {
 #booking-error[hidden] {
     display: none;
 }
-#booking-modal fieldset[hidden] {
-    display: none;
-}
-#booking-step-2:not([hidden]) {
-    display: grid;
-    gap: 0.5rem;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-#booking-step-2 legend {
-    margin-bottom: 0.75rem;
-}
-
-#booking-step-2 input,
-#booking-step-2 select {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    padding: 0.5rem;
-    font: inherit;
-}
-
-#booking-step-2 button[type="submit"] {
-    justify-self: end;
-    margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
-}

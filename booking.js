@@ -1,254 +1,152 @@
-(() => {
-    const modal = document.getElementById('booking-modal');
-    if (!modal) return;
 
-    const form = modal.querySelector('#booking-form');
-    const title = modal.querySelector('#booking-title');
-    const step1 = modal.querySelector('#booking-step-1');
-    const dateInput = modal.querySelector('#booking-date');
-    const nextButton = modal.querySelector('#booking-next');
-    const errorMessage = modal.querySelector('#booking-error');
 
-    let step2 = modal.querySelector('#booking-step-2');
 
-    if (!step2) {
-        step2 = document.createElement('fieldset');
-        step2.id = 'booking-step-2';
-        step2.innerHTML = `
-            <legend>Your booking details</legend>
 
-            <label for="booking-name">Name</label>
-            <input id="booking-name" name="name" autocomplete="name" required>
+// Sparar ID för den challenge som användaren vill boka
+let selectedChallengeId = null;
 
-            <label for="booking-email">Email</label>
-            <input id="booking-email" name="email" type="email"
-                   autocomplete="email" required>
+// Funktion som öppnar bokningsrutan för en vald challenge
+function openBooking(challengeId) {
 
-            <label for="booking-time">Time</label>
-            <select id="booking-time" name="time" required></select>
+    // Sparar ID för den valda challengen
+    selectedChallengeId = challengeId;
 
-            <label for="booking-participants">Participants</label>
-            <select id="booking-participants" name="participants" required></select>
+    const bookingModal = document.getElementById("booking-modal"); // Hämtar dialogrutan från HTML med ID
 
-            <button type="submit">Continue</button>
-        `;
-        form.append(step2);
+    bookingModal.showModal(); // Öppnar dialogrutan som en popup 
+}
+// Funktion som stänger bokningsrutan
+function closeBooking() {
+    const bookingModal = document.getElementById("booking-modal"); // Hämtar samma dialogruta från HTML
+
+    bookingModal.close(); // Stänger dialogruta
+}
+
+//Lyssnar efter klick på webbsidan
+document.addEventListener('click', (event) => {
+    
+    // Kontrollerar om användaren klickat på en bokningsknapp
+    const bookingButton = event.target.closest('.btn-card-red');
+
+    // Om klicket inte var på en bokningsknapp avslutas funktionen
+    if(!bookingButton) {
+        return;
     }
+     // Förhindrar att länken navigerar till #
+    event.preventDefault();
 
-    const nameInput = step2.querySelector('#booking-name');
-    const emailInput = step2.querySelector('#booking-email');
-    const timeSelect = step2.querySelector('#booking-time');
-    const participantsSelect = step2.querySelector('#booking-participants');
+    // Hämtar ID för den challenge användaren vill boka
+    const challengeId = bookingButton.dataset.id;
 
-    let selectedRoom;
-    let pendingRequest;
+    // Öppnar bokningsrutan för vald challenge
+    openBooking(challengeId);
+});
 
-    function showStep(number) {
-        step1.hidden = step1.disabled = number !== 1;
-        step2.hidden = step2.disabled = number !== 2;
-        title.textContent = 'Book room (step ' + number + ')';
+// Hämtar knappen som stänger bokningsrutan
+const closeBookingButton = document.getElementById('close-booking');
+
+// Lyssnar efter klick på stängningsknappen
+closeBookingButton.addEventListener('click', () => {
+
+    // Anropar funktionen som stänger bokningsrutan
+    closeBooking();
+})
+
+//Hämtar datumfältet från bokningsformuläret
+const bookingDate = document.getElementById('booking-date');
+
+// Hämtar dagens datum enligt användarens lokala tid
+const today = new Date();
+
+// Omvandlar dagens datum till formatet YYYY-MM-DD
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, "0");
+const day = String(today.getDate()).padStart(2, "0");
+
+// Anger dagens datum som det tidigaste tillåtna datumet
+bookingDate.min = `${year}-${month}-${day}`;
+
+
+// Hämtar knappen som går vidare i bokningen
+const bookingNextButton = document.getElementById('booking-next');
+
+// Lyssnar efter klick på Next-knappen
+bookingNextButton.addEventListener('click',async () => {
+
+    // Kontrollerar om användaren har valt ett giltigt datum
+    if (!bookingDate.checkValidity()) {
+
+        // Visar webbläsarens felmeddelande
+        bookingDate.reportValidity();
+
+        // Avslutar funktionen om datumet är ogiltigt
+        return;
     }
+    // Hämtar lediga tider och väntar på API-svaret
+    const availableTimes = await getAvailableTimes(
+    selectedChallengeId,
+    bookingDate.value
+);
 
-    function fillOptions(select, placeholder, values) {
-        select.replaceChildren(new Option(placeholder, ''));
+    // Visar arrayen som senare ska användas i steg 2
+    console.log('Tider till steg 2:', availableTimes);
+    
+    // Hämtar elementet där felmeddelanden ska visas
+    const bookingError = document.getElementById('booking-error');
 
-        for (const value of values) {
-            select.add(new Option(String(value), String(value)));
-        }
+    // Döljer tidigare felmeddelanden
+    bookingError.hidden = true;
+
+    // Kontrollerar om API-anropet misslyckades
+    if (availableTimes === null) {
+        bookingError.textContent = 'Could not load available times. Please try again.';
+        bookingError.hidden = false;
+        return;
+}
+
+    // Kontrollerar om det saknas lediga tider
+    if (availableTimes.length === 0) {
+        bookingError.textContent = 'No available times for this date.';
+        bookingError.hidden = false;
+        return;
     }
+});
+    
+// Hämtar lediga tider för vald challenge och datum
+async function getAvailableTimes(challengeId, date) {
+     // Kontrollerar att funktionen faktiskt körs
+    console.log('Funktionen getAvailableTimes körs!');
 
-    function showError(message) {
-        errorMessage.textContent = message;
-        errorMessage.hidden = !message;
+    // Skapar API-adressen med challenge-ID och valt datum
+    const url = `https://lernia-sjj-assignments.vercel.app/api/booking/available-times?challenge=${challengeId}&date=${date}`;
+
+    try {
+        // Skickar en förfrågan till API:et
+        const response = await fetch(url);
+
+        // Kontrollerar om API:et svarade med ett fel
+        if (!response.ok) {
+            throw new Error('Kunde inte hämta lediga tider');
+        }
+
+        // Omvandlar svaret från JSON till ett JavaScript-objekt
+        const data = await response.json();
+
+        // Tar bort eventuella dubbletter från de lediga tiderna
+        const availableTimes = [...new Set(data.slots)];
+
+        // Visar tiderna i konsolen för testning
+        console.log('Lediga tider:', availableTimes);
+
+        // Returnerar tiderna så att de kan användas i nästa steg
+        return availableTimes;
+
+    } catch (error) {
+
+        // Visar ett felmeddelande om något går fel
+        console.error('Fel vid hämtning av tider:', error);
+
+        // Returnerar en tom array om hämtningen misslyckas
+        return null;
     }
-
-    function resetBooking() {
-        pendingRequest?.abort();
-        pendingRequest = undefined;
-        form.reset();
-        nextButton.disabled = false;
-        showError('');
-        showStep(1);
-    }
-
-    showStep(1);
-
-    document.addEventListener('click', event => {
-        const button = event.target.closest('.btn-card-red[data-id]');
-        if (!button || modal.open) return;
-
-        event.preventDefault();
-        resetBooking();
-
-        selectedRoom = {
-            id: Number(button.dataset.id),
-            min: Number(button.dataset.minParticipants),
-            max: Number(button.dataset.maxParticipants)
-        };
-
-        const today = new Date();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-
-        dateInput.min = `${today.getFullYear()}-${month}-${day}`;
-        modal.showModal();
-    });
-
-    modal.querySelector('#close-booking').addEventListener('click', () => modal.close());
-
-    modal.addEventListener('close', () => {
-        if (!modal.open) resetBooking();
-    });
-
-    nextButton.addEventListener('click', async () => {
-        if (!dateInput.reportValidity() || pendingRequest) return;
-
-        const room = selectedRoom;
-        const date = dateInput.value;
-
-        if (!Number.isInteger(room?.min) || !Number.isInteger(room?.max) ||
-            room.min < 1 || room.max < room.min) {
-            showError('Could not load participant limits for this room.');
-            return;
-        }
-
-        showError('');
-        const request = new AbortController();
-        pendingRequest = request;
-        nextButton.disabled = true;
-
-        try {
-            const params = new URLSearchParams({ challenge: room.id, date });
-            const response = await fetch(
-                'https://lernia-sjj-assignments.vercel.app/api/booking/available-times?' + params,
-                { signal: request.signal }
-            );
-
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-
-            const { slots } = await response.json();
-            if (!Array.isArray(slots)) throw new Error('Invalid slots');
-
-            if (request !== pendingRequest || !modal.open || date !== dateInput.value) return;
-
-            if (slots.length === 0) {
-                showError('No available times for this date.');
-                return;
-            }
-
-            fillOptions(timeSelect, 'Choose a time', new Set(slots));
-
-            const participants = Array.from(
-                { length: room.max - room.min + 1 },
-                (_, index) => room.min + index
-            );
-
-            fillOptions(participantsSelect, 'Choose participants', participants);
-            showStep(2);
-            nameInput.focus();
-        } catch (error) {
-            if (request === pendingRequest && modal.open && date === dateInput.value) {
-                showError('Could not load available times. Please try again.');
-            }
-        } finally {
-            if (request === pendingRequest) {
-                pendingRequest = undefined;
-                nextButton.disabled = false;
-            }
-        }
-    });
-
-        const submitButton = step2.querySelector('button[type="submit"]');
-    const closeButton = modal.querySelector('#close-booking');
-
-    const submitError = document.createElement('p');
-    submitError.setAttribute('role', 'alert');
-    submitError.hidden = true;
-    step2.append(submitError);
-
-    const confirmation = document.createElement('section');
-    confirmation.hidden = true;
-    confirmation.innerHTML = `
-        <p role="status">Thank you for your booking!</p>
-        <button type="button">Close</button>
-    `;
-    form.append(confirmation);
-
-    const confirmationClose = confirmation.querySelector('button');
-    confirmationClose.addEventListener('click', () => modal.close());
-
-    let submitting = false;
-
-    modal.addEventListener('cancel', event => {
-        if (submitting) event.preventDefault();
-    });
-
-    modal.addEventListener('close', () => {
-        confirmation.hidden = true;
-        submitError.hidden = true;
-        nameInput.setCustomValidity('');
-    });
-
-    nameInput.addEventListener('input', () => nameInput.setCustomValidity(''));
-
-    form.addEventListener('submit', async event => {
-        event.preventDefault();
-        if (submitting || !confirmation.hidden) return;
-
-        if (step2.hidden) {
-            nextButton.click();
-            return;
-        }
-
-        const name = nameInput.value.trim();
-
-        if (!name) {
-            nameInput.setCustomValidity('Please enter your name.');
-            nameInput.reportValidity();
-            return;
-        }
-
-        const booking = {
-            challenge: selectedRoom.id,
-            date: dateInput.value,
-            name,
-            email: emailInput.value.trim(),
-            time: timeSelect.value,
-            participants: Number(participantsSelect.value)
-        };
-
-        submitting = true;
-        submitButton.disabled = true;
-        closeButton.disabled = true;
-        submitError.hidden = true;
-
-        try {
-            const response = await fetch(
-                'https://lernia-sjj-assignments.vercel.app/api/booking/reservations',
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(booking)
-                }
-            );
-
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-
-            const data = await response.json();
-            if (data.status !== 'ok') throw new Error('Booking was not confirmed');
-
-            step2.hidden = true;
-            step2.disabled = true;
-            title.textContent = 'Book room (step 3)';
-            confirmation.hidden = false;
-            confirmationClose.focus();
-        } catch (error) {
-            submitError.textContent = 'We could not confirm your booking. Please try again.';
-            submitError.hidden = false;
-        } finally {
-            submitting = false;
-            submitButton.disabled = false;
-            closeButton.disabled = false;
-        }
-    });
-})();
+}
