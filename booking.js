@@ -158,24 +158,97 @@
         }
     });
 
-    form.addEventListener('submit', event => {
+        const submitButton = step2.querySelector('button[type="submit"]');
+    const closeButton = modal.querySelector('#close-booking');
+
+    const submitError = document.createElement('p');
+    submitError.setAttribute('role', 'alert');
+    submitError.hidden = true;
+    step2.append(submitError);
+
+    const confirmation = document.createElement('section');
+    confirmation.hidden = true;
+    confirmation.innerHTML = `
+        <p role="status">Thank you for your booking!</p>
+        <button type="button">Close</button>
+    `;
+    form.append(confirmation);
+
+    const confirmationClose = confirmation.querySelector('button');
+    confirmationClose.addEventListener('click', () => modal.close());
+
+    let submitting = false;
+
+    modal.addEventListener('cancel', event => {
+        if (submitting) event.preventDefault();
+    });
+
+    modal.addEventListener('close', () => {
+        confirmation.hidden = true;
+        submitError.hidden = true;
+        nameInput.setCustomValidity('');
+    });
+
+    nameInput.addEventListener('input', () => nameInput.setCustomValidity(''));
+
+    form.addEventListener('submit', async event => {
         event.preventDefault();
+        if (submitting || !confirmation.hidden) return;
 
         if (step2.hidden) {
             nextButton.click();
             return;
         }
 
-        form.dispatchEvent(new CustomEvent('booking-details-ready', {
-            bubbles: true,
-            detail: {
-                challenge: selectedRoom.id,
-                date: dateInput.value,
-                name: nameInput.value.trim(),
-                email: emailInput.value.trim(),
-                time: timeSelect.value,
-                participants: Number(participantsSelect.value)
-            }
-        }));
+        const name = nameInput.value.trim();
+
+        if (!name) {
+            nameInput.setCustomValidity('Please enter your name.');
+            nameInput.reportValidity();
+            return;
+        }
+
+        const booking = {
+            challenge: selectedRoom.id,
+            date: dateInput.value,
+            name,
+            email: emailInput.value.trim(),
+            time: timeSelect.value,
+            participants: Number(participantsSelect.value)
+        };
+
+        submitting = true;
+        submitButton.disabled = true;
+        closeButton.disabled = true;
+        submitError.hidden = true;
+
+        try {
+            const response = await fetch(
+                'https://lernia-sjj-assignments.vercel.app/api/booking/reservations',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(booking)
+                }
+            );
+
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+
+            const data = await response.json();
+            if (data.status !== 'ok') throw new Error('Booking was not confirmed');
+
+            step2.hidden = true;
+            step2.disabled = true;
+            title.textContent = 'Book room (step 3)';
+            confirmation.hidden = false;
+            confirmationClose.focus();
+        } catch (error) {
+            submitError.textContent = 'We could not confirm your booking. Please try again.';
+            submitError.hidden = false;
+        } finally {
+            submitting = false;
+            submitButton.disabled = false;
+            closeButton.disabled = false;
+        }
     });
 })();
