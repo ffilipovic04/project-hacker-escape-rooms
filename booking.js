@@ -169,7 +169,7 @@
     const confirmation = document.createElement('section');
     confirmation.hidden = true;
     confirmation.innerHTML = `
-        <p role="status">Thank you for your booking!</p>
+        <p role="status">Thank you!</p>
         <button type="button">Close</button>
     `;
     form.append(confirmation);
