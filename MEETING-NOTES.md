@@ -58,4 +58,12 @@ Beslut:
 - Review: Elin granskar Filips pull request/vv och  Samuel granskar Fabians/vv
 - Yasirs review bestäms tillsammans med honom.
 
+2026-11-26- Spontan möte 
+Deltagare: Samuel, filip och fabian 
+
+gick igenom Samuels pull request och de merge-konflikter som uppstått.
+upptäckte att Yasir och Samuel hade inmplenterat samma funktion för "No matching challenges". 
+Yasir ska justera sin kod så att Samuels lösning kan intregeras. 
+Inväntar Yasirs ändringar innan arbetet med sammanfogningen fortsätter.
+
 Nästa möte: Onsdag 12.00
