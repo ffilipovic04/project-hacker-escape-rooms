@@ -59,7 +59,6 @@ ratingStars.forEach(function (star) {
     applyFilters();
   });
 });
-});
 
 function matchesRating(challenge) {
     return challenge.rating >= ratingFrom && challenge.rating <= ratingTo;
