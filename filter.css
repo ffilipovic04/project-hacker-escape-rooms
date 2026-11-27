@@ -30,13 +30,30 @@
 
 .star.active,
 .star-to.active {
-  color: var(--color-red);
+    color: var(--color-red);
 }
+
+.tag {
+background-color: white;
+border: 1px solid var(--color-dark-blue);
+border-radius:20px; 
+padding: 4px 12px;
+margin: 4px; 
+cursor: pointer; 
+
+}
+
+/* style när etikett är vald (class active) */
+.tag.active {
+background-color: var(--color-dark-blue);
+color: white; 
+}
+
 .no-matches {
-  grid-column: 1 / -1;
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 40px 0;
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 40px 0;
 }

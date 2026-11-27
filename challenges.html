@@ -66,29 +66,45 @@
           Filter challenges
         </button>
 
-        <div id="filter-panel">
-          <input type="checkbox" id="online-checkbox" />
-          <label for="online-checkbox">Include online challenges</label>
+        <section class = "popular-section">
+            <h2 class = "section-title">Our challenges</h2>
+            <button type="button" id="filter-toggle" class="btn btn-blue">Filter challenges</button>
 
-          <input type="checkbox" id="onsite-checkbox" />
-          <label for="onsite-checkbox">Include on-site challenges</label>
-          <p>By rating</p>
-          <span>from</span>
-          <button type="button" class="star" data-value="1">★</button>
-          <button type="button" class="star" data-value="2">★</button>
-          <button type="button" class="star" data-value="3">★</button>
-          <button type="button" class="star" data-value="4">★</button>
-          <button type="button" class="star" data-value="5">★</button>
+            <div id="filter-panel">
+              <input type="checkbox" id="online-checkbox">
+              <label for="online-checkbox">Include online challenges</label>
 
-          <br />
+<input type="checkbox" id="onsite-checkbox">
+              <label for="onsite-checkbox">Include on-site challenges</label>
+              <p>By rating</p>
+<span>from</span>
+<button type="button" class="star" data-value="1">★</button>
+<button type="button" class="star" data-value="2">★</button>
+<button type="button" class="star" data-value="3">★</button>
+<button type="button" class="star" data-value="4">★</button>
+<button type="button" class="star" data-value="5">★</button>
 
-          <span>to</span>
-          <button type="button" class="star-to" data-value="1">★</button>
-          <button type="button" class="star-to" data-value="2">★</button>
-          <button type="button" class="star-to" data-value="3">★</button>
-          <button type="button" class="star-to" data-value="4">★</button>
-          <button type="button" class="star-to" data-value="5">★</button>
-        </div>
+<br>
+
+  <span>to</span>
+<button type="button" class="star-to" data-value="1">★</button>
+<button type="button" class="star-to" data-value="2">★</button>
+<button type="button" class="star-to" data-value="3">★</button>
+<button type="button" class="star-to" data-value="4">★</button>
+<button type="button" class="star-to" data-value="5">★</button>
+
+<br>
+<label for="search -text">Search</label>
+<input type="text" id="search-text">
+
+<br>
+
+<p>By tags </p>
+<div id="tag-list"></div>
+
+</div>          
+            <div id="all-challenges-container" class="challenges-grid"></div>
+        </section>
 
         <div id="all-challenges-container" class="challenges-grid"></div>
       </section>
@@ -127,75 +143,57 @@
 
     <!-- Bokningsruta som öppnas när användaren vill boka en challenge -->
     <dialog id="booking-modal" aria-labelledby="booking-title">
-      <!-- Knapp för att stänga bokningsrutan -->
-      <button
-        type="button"
-        id="close-booking"
-        class="close-booking"
-        aria-label="Close booking"
-      >
-        &times;
-      </button>
 
-      <h2 id="booking-title">Book room (step 1)</h2>
+        <!-- Knapp för att stänga bokningsrutan -->
+        <button type="button" id="close-booking" class="close-booking" aria-label="Close booking">
+            &times;
+        </button>
 
-      <!-- Formulär för bokningen -->
-      <form id="booking-form">
-        <!-- Första steget: användaren väljer datum -->
-        <fieldset id="booking-step-1">
-          <legend>What date would you like to come?</legend>
+        <h2 id="booking-title">Book room (step 1)</h2>
 
-          <label for="booking-date">Date</label>
-          <input type="date" id="booking-date" required />
+        <!-- Formulär för bokningen -->
+        <form id="booking-form">
 
-          <!-- Visar meddelanden om bokningstiderna inte kan hämtas -->
-          <p id="booking-error" role="alert" hidden></p>
+            <!-- Första steget: användaren väljer datum -->
+            <fieldset id="booking-step-1">
+                <legend>What date would you like to come?</legend>
 
-          <button type="button" id="booking-next">
-            Search available times
-          </button>
-        </fieldset>
-        <fieldset id="booking-step-2" hidden disabled>
-          <legend>Your booking details</legend>
+                <label for="booking-date">Date</label>
+                <input type="date" id="booking-date" required>
+                
+                <!-- Visar meddelanden om bokningstiderna inte kan hämtas -->
+                <p id="booking-error" role="alert" hidden></p>
 
-          <label for="booking-name">Name</label>
-          <input
-            type="text"
-            id="booking-name"
-            name="name"
-            autocomplete="name"
-            required
-          />
+                <button type="button" id="booking-next">
+                    Search available times
+                </button>
+            </fieldset>
+            <fieldset id="booking-step-2" hidden disabled>
+    <legend>Your booking details</legend>
 
-          <label for="booking-email">Email</label>
-          <input
-            type="email"
-            id="booking-email"
-            name="email"
-            autocomplete="email"
-            required
-          />
+    <label for="booking-name">Name</label>
+    <input type="text" id="booking-name" name="name" autocomplete="name" required>
 
-          <label for="booking-time">Time</label>
-          <select id="booking-time" name="time" required></select>
+    <label for="booking-email">Email</label>
+    <input type="email" id="booking-email" name="email" autocomplete="email" required>
 
-          <label for="booking-participants">Participants</label>
-          <select
-            id="booking-participants"
-            name="participants"
-            required
-          ></select>
+    <label for="booking-time">Time</label>
+    <select id="booking-time" name="time" required></select>
 
-          <button type="submit">Continue</button>
-        </fieldset>
-      </form>
+    <label for="booking-participants">Participants</label>
+    <select id="booking-participants" name="participants" required></select>
+
+    <button type="submit">Continue</button>
+</fieldset>
+
+        </form>
+
     </dialog>
 
     <script src="script.js"></script>
     <script src="challenges.js"></script>
     <script src="booking.js"></script>
-    <script src="test-data.js"></script>
-    <script src="no-matches.js"></script>
     <script src="filter.js"></script>
-  </body>
+    <script src="no-matches.js"></script>
+</body>
 </html>
