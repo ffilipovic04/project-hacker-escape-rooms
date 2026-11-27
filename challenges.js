@@ -82,7 +82,7 @@ function renderchallenges(list, containerId) {
                 <p class="challenge-text">
                     ${challenge.description}
                 </p>
-                <a href="#" class="btn btn-card-red" data-id="${challenge.id}">Book this room</a>
+                <a href="#" class="btn btn-card-red" data-id="${challenge.id}" data-min-participants="${challenge.minParticipants}" data-max-participants="${challenge.maxParticipants}">Book this room</a>
             </div>
         `;
         // Färdiga kortet läggs till i HTML-containern på hemsidan och visas upp på skärmen.

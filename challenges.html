@@ -155,6 +155,39 @@
             Search available times
           </button>
         </fieldset>
+        <fieldset id="booking-step-2" hidden disabled>
+          <legend>Your booking details</legend>
+
+          <label for="booking-name">Name</label>
+          <input
+            type="text"
+            id="booking-name"
+            name="name"
+            autocomplete="name"
+            required
+          />
+
+          <label for="booking-email">Email</label>
+          <input
+            type="email"
+            id="booking-email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+
+          <label for="booking-time">Time</label>
+          <select id="booking-time" name="time" required></select>
+
+          <label for="booking-participants">Participants</label>
+          <select
+            id="booking-participants"
+            name="participants"
+            required
+          ></select>
+
+          <button type="submit">Continue</button>
+        </fieldset>
       </form>
     </dialog>
 

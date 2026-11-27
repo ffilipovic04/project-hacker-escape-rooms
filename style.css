@@ -339,6 +339,8 @@ img {
     text-align: left;
     flex: 0 0 85%;
     scroll-snap-align: start; /* Kortets startkant snäpper fast i skärmkanten */
+    display: flex;
+    flex-direction: column;
 }
 
 .challenge-img {
@@ -351,6 +353,7 @@ img {
     padding: 20px;
     display: flex;
     flex-direction: column; /* Info i kortet blir vertikal flexbox */
+    flex-grow: 1;
 }
 
 .challenge-title {
@@ -398,6 +401,7 @@ img {
     font-size: 16px;
     width: 180px;
     height: 44px;
+    margin-top: auto;
 }
 
 .popular-buttons {
@@ -923,4 +927,49 @@ img {
 /* Säkerställer att dolda felmeddelanden inte visas */
 #booking-error[hidden] {
     display: none;
+}
+#booking-modal fieldset[hidden] {
+    display: none;
+}
+#booking-step-2:not([hidden]) {
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#booking-step-2 legend {
+    margin-bottom: 0.75rem;
+}
+
+#booking-step-2 input,
+#booking-step-2 select {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0.5rem;
+    font: inherit;
+}
+
+#booking-step-2 button[type="submit"] {
+    justify-self: end;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+#booking-modal #booking-form > section:not([hidden]) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 3rem);
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+#booking-modal #booking-form > section > p {
+    margin: 0;
 }
