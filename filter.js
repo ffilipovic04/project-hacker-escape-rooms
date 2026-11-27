@@ -90,7 +90,7 @@ const title = challenge.title.toLowerCase();
 const description = challenge.description.toLowerCase();
 
 return title.includes(text) || description.includes(text);
-
+}
 
 
 function matchesRating(challenge) {
