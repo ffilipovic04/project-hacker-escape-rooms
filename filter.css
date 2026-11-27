@@ -1,0 +1,56 @@
+#filter-panel {
+display: none;
+}
+
+#filter-panel.open {
+    display: block;
+    padding: 35px;
+
+
+}
+
+.star {
+background: none; 
+border: none; 
+font-size: 24px;
+color: lightgray; 
+cursor: pointer; 
+
+}
+
+.star.active {
+ color: var(--color-red);
+
+}
+
+
+.star,.star-to {
+   
+    background: none;
+   border: none;
+   font-size: 24px;
+   color: lightgray;
+   cursor: pointer;
+}
+
+.star.active,
+.star-to.active {
+    color: var(--color-red);
+}
+
+.tag {
+background-color: white;
+border: 1px solid var(--color-dark-blue);
+border-radius:20px; 
+padding: 4px 12px;
+margin: 4px; 
+cursor: pointer; 
+
+}
+
+/* style när etikett är vald (class active) */
+.tag.active {
+background-color: var(--color-dark-blue);
+color: white; 
+}
+
